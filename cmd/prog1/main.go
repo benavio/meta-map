@@ -3,9 +3,10 @@ package main
 import (
 	"fmt"
 	"log/slog"
-	"meta-map/internal/fsdo"
-	"meta-map/internal/lib/sl"
 	"os"
+
+	"github.com/benavio/meta-map.git/internal/fsdo"
+	"github.com/benavio/meta-map.git/internal/lib/sl"
 )
 
 const (
