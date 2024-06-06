@@ -20,7 +20,7 @@ type Dada struct {
 func GetExif() ([][]Dada, error) {
 	inf := "GetExif"
 	arr := make([][]Dada, 2000, 4000)
-	dir, err := os.Open("../images")
+	dir, err := os.Open("./images")
 	if err != nil {
 		panic(err)
 	}
@@ -51,7 +51,7 @@ func GetExif() ([][]Dada, error) {
 // Open and decode files
 func DecodeExif(fileName string, dir *os.File) (exif2.Exif, error) {
 	inf := "decodeExif"
-	f, err := os.Open("../images/" + fileName)
+	f, err := os.Open("./images/" + fileName)
 	if err != nil {
 		return exif2.Exif{}, fmt.Errorf("%s : %w", inf, err)
 	}

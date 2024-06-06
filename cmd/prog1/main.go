@@ -1,23 +1,28 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"log"
 	"log/slog"
 	"os"
 
+	"github.com/benavio/meta-map.git/internal/cleints/telega"
 	"github.com/benavio/meta-map.git/internal/fsdo"
 	"github.com/benavio/meta-map.git/internal/lib/sl"
 )
 
 const (
-	envLocal = "local"
-	envDev   = "dev"
-	envProd  = "Prod"
+	envLocal  = "local"
+	envDev    = "dev"
+	envProd   = "Prod"
+	tgBotHost = "api.telegram.org"
 )
 
 func main() {
 
 	log := SetupLogger(envLocal)
+	tgClient := telega.New(MustToken(), tgBotHost)
 
 	arr, err := fsdo.GetExif()
 	if err != nil {
@@ -26,6 +31,20 @@ func main() {
 
 	fmt.Println(arr[1][0].Date)
 
+}
+
+func MustToken() string {
+	token := flag.String("token-bot-token",
+		"",
+		"token fo access",
+	)
+
+	flag.Parse()
+
+	if *token == "" {
+		log.Fatal("token broken")
+	}
+	return *token
 }
 
 // Init logger
